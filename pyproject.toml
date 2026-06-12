@@ -9,6 +9,7 @@ dependencies = [
     "deep-translator>=1.11.4",
     "faster-whisper>=1.2.1",
     "ffmpeg-python>=0.2.0",
+    "fpdf2>=2.8.7",
     "huggingface-hub>=1.17.0",
     "imageio-ffmpeg>=0.6.0",
     "langchain~=0.2",

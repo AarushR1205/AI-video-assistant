@@ -1,39 +1,42 @@
-yt-dlp
-pydub
-ffmpeg-python
-imageio-ffmpeg
 
-openai-whisper
-torch
-torchaudio
+# ── Audio / Video acquisition ─────────────────────────────────────────────────
+yt-dlp                  
+pydub                     
+ffmpeg-python              
 
-deep-translator
+# ── Speech-to-Text (local Whisper) ────────────────────────────────────────────
+openai-whisper          
+torch                     
+torchaudio                
 
-langchain~=0.2
-langchain-core~=0.2
-langchain-community~=0.2
-langchain-mistralai
-mistralai
+# ── Translation (Hindi → English) ─────────────────────────────────────────────
+deep-translator           
 
-chromadb
-sentence-transformers
-langchain-huggingface
-langchain-text-splitters
-huggingface-hub
-tiktoken
+# ── LLM Orchestration — LangChain LCEL + Mistral ──────────────────────────────
+langchain
+langchain-core
+langchain-community
+langchain-mistralai        
+mistralai                  
 
+# ── RAG Pipeline ──────────────────────────────────────────────────────────────
+chromadb                   
+sentence-transformers      
+langchain-huggingface      
+huggingface-hub           
+tiktoken                   
+
+# ── Streamlit UI ──────────────────────────────────────────────────────────────
 streamlit
-streamlit-extras
-watchdog
+streamlit-extras           
+watchdog                   
 
-reportlab
+# ── PDF & TXT Export ──────────────────────────────────────────────────────────
+reportlab                 
+fpdf2                      
 
-pypdf
-python-docx
-unstructured
-
-pydantic
-python-dotenv
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dotenv              
 numpy
-tqdm
+tqdm                      
 requests
