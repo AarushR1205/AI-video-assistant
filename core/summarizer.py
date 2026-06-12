@@ -2,7 +2,7 @@ from langchain_mistralai import ChatMistralAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_core import RunnablePassthrough, RunnableLambda
+from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 
 import os
 
