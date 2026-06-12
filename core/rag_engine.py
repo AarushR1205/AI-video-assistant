@@ -7,7 +7,7 @@ from core.vector_store import build_vector_store, get_retriever, load_vectore_st
 
 def get_llm():
     return ChatMistralAI(
-        model='mistral-large-latest',
+        model='mistral-small-latest',
         mistral_api_key=os.getenv("MISTRAL_API_KEY"),
         temperature=0.3
     )
