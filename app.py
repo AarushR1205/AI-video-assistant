@@ -4,12 +4,15 @@ from dotenv import load_dotenv
 from utils.audio_processor import process_input
 from core.transcriber import transcribe_all
 from core.summarizer import summarize, generate_title
-from core.extractor import extract_action_items, extract_key_decisions, extract_questions
+from core.extractor import (
+    extract_action_items,
+    extract_key_decisions,
+    extract_questions,
+)
 from core.rag_engine import build_rag_chain, ask_question
 
 load_dotenv()
 
-# ─── Page Config ────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Lens — AI Video Assistant",
     page_icon="◈",
@@ -17,7 +20,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─── Custom CSS ─────────────────────────────────────────────────────────────────
+
 st.markdown(
     """
 <style>
@@ -567,7 +570,6 @@ hr {
     unsafe_allow_html=True,
 )
 
-# ─── Session State Init ──────────────────────────────────────────────────────────
 for key, default in {
     "result": None,
     "chat_history": [],
@@ -578,8 +580,6 @@ for key, default in {
     if key not in st.session_state:
         st.session_state[key] = default
 
-
-# ─── Helpers ────────────────────────────────────────────────────────────────────
 PIPELINE_STEPS = [
     ("audio", "01", "Audio"),
     ("transcript", "02", "Transcribe"),
@@ -606,9 +606,7 @@ def render_pipeline_sidebar():
         )
 
 
-# ─── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    # Wordmark
     st.markdown(
         """
 <div style="padding: 0.5rem 0 0.25rem;">

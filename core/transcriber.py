@@ -3,14 +3,12 @@ import os
 import requests
 from pydub import AudioSegment
 
-# Sarvam's sync STT-translate API rejects audio longer than 30s.
-# We slice each chunk into 25s pieces (with a 5s safety margin) before sending.
 SARVAM_PIECE_SECONDS = 25
 WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small")
-
 SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
 SARVAM_STT_TRANSLATE_URL = "https://api.sarvam.ai/speech-to-text-translate"
 SARVAM_MODEL = os.getenv("SARVAM_STT_MODEL", "saaras:v2.5")
+
 _model = None
 
 def load_model():
@@ -24,14 +22,12 @@ def load_model():
 
 def transcribe_chunk_whisper(chunk_path: str) -> str:
     model = load_model()
-
-    result = model.transcribe(chunk_path, task="transcribe")
+    result = model.transcribe(chunk_path, task="transcribe", fp16=False)
     return result["text"]
 
 def _send_to_sarvam(piece_path: str) -> str:
     """Send one ≤30s WAV file to Sarvam and return the English transcript."""
     headers = {"api-subscription-key": SARVAM_API_KEY}
-
     with open(piece_path, "rb") as f:
         files = {"file": (os.path.basename(piece_path), f, "audio/wav")}
         data = {"model": SARVAM_MODEL, "with_diarization": "false"}
@@ -60,9 +56,9 @@ def transcribe_chunk_sarvam(chunk_path: str) -> str:
 
     audio = AudioSegment.from_wav(chunk_path)
     piece_ms = SARVAM_PIECE_SECONDS * 1000
-
     full_text = ""
     total_pieces = (len(audio) + piece_ms - 1) // piece_ms
+
     for i, start in enumerate(range(0, len(audio), piece_ms)):
         piece = audio[start : start + piece_ms]
         piece_path = f"{chunk_path}_sv_{i}.wav"
